@@ -1,0 +1,51 @@
+@import '~antd/dist/antd.less';
+
+.App {
+  .logo{
+    height: 64px;
+
+    position: relative;
+    padding: 0 24px;
+    overflow: hidden;
+    background: #001529;
+    cursor: pointer;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+
+    img{
+      display: inline-block;
+      height: 32px;
+      vertical-align: middle;
+    }
+    h1{
+      display: inline-block;
+      margin: 0 0 0 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      vertical-align: middle;
+      animation: fade-in;
+      animation-duration: .3s;
+    }
+  }
+
+  .header{
+    background: #fff;
+    .trigger {
+      font-size: 18px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .trigger:hover {
+      color: #1890ff;
+    }
+  }
+
+  .content{
+    background: #fff;
+  }
+}
+

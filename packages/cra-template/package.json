@@ -1,12 +1,12 @@
 {
-  "name": "cra-template",
-  "version": "1.0.3",
+  "name": "cra-template-cc",
+  "version": "1.0.3-2006180",
   "keywords": [
     "react",
     "create-react-app",
     "template"
   ],
-  "description": "The base template for Create React App.",
+  "description": "The base template for Create React App. Base on cra-template version 1.0.3",
   "main": "template.json",
   "repository": {
     "type": "git",
