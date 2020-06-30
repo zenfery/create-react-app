@@ -28,12 +28,13 @@ function request(url, options) {
   // }
   // 请求
   let request = fetch(url, optionsCombine).then(handleResponse);
+  console.log(request);
 
   return request;
 }
 // GET
 function get(url) {
-  return request(url);
+  return request(url, { method: 'GET' });
 }
 
 function handleResponse(response) {
@@ -48,7 +49,9 @@ function handleResponse(response) {
   }
 }
 
+// 处理 json 响应结果
 function handleJSONResponse(response) {
+  console.log(response);
   if (response.status >= 200 && response.status < 300) {
     return response.json().then(function(body) {
       //登录过期的情况
@@ -56,7 +59,11 @@ function handleJSONResponse(response) {
         body['error_code'] === '200102' &&
         body['msg'] === 'COMMON_PERMISSION_NO_LOGIN'
       ) {
-        window.location.href = '/login.do';
+        let currUrl = window.location.href;
+        console.log(currUrl);
+        window.location.href =
+          'https://sso-devtest.chinacache.com/queryByCookie?clientName=secure-portal-local&accessURL=' +
+          encodeURI(currUrl);
       }
       return body;
     });

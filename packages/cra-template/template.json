@@ -14,8 +14,8 @@
     },
     "devDependencies": {
       "less": "=3.11.2",
-      "less-loader": "6.1.0"
-      
+      "less-loader": "6.1.0",
+      "http-proxy-middleware": "1.0.4"
     }
   }
 }

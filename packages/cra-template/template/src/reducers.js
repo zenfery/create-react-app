@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 // 初始化全局状态
 let initState = {
   count: 1,
-  user: {},
+  user: null,
   client: {}, //绑定的客户
   locale: 'en',
 };
@@ -31,10 +31,21 @@ const locale = (locale = initState.locale, action) => {
   }
 };
 
+// 设置 user
+const user = (user = initState.user, action) => {
+  switch (action.type) {
+    case 'SET_USER':
+      return action.user;
+    default:
+      return user;
+  }
+};
+
 // 合并分支 reducer
 const reducers = combineReducers({
   count,
   locale,
+  user,
 });
 
 export default reducers;

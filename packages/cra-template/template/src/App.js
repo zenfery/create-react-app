@@ -10,6 +10,7 @@ import {
   useRouteMatch,
   useParams,
 } from 'react-router-dom';
+import AuthRoute from './components/AuthRoute';
 import { Button, Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
@@ -22,6 +23,7 @@ import {
   BulbOutlined,
 } from '@ant-design/icons';
 
+import { get } from './common/Request';
 import Dashboard from './views/dashboard/Dashboard.js';
 
 // i18n
@@ -40,6 +42,9 @@ const mapDispatchToProps = dispatch => {
     changeLocale: () => {
       dispatch({ type: 'CHANGE_LOCALE' });
     },
+    setUser: user => {
+      dispatch({ type: 'SET_USER', user: user });
+    },
   };
 };
 
@@ -48,6 +53,18 @@ class App extends React.Component {
     collapsed: false, // 切换菜单收起
     titleShow: true, // 显示title
   };
+
+  // 挂载前
+  componentWillMount() {
+    let _this = this;
+
+    // 获取用户信息，如果未登录，跳转到登录页面
+    get('/proxy-cloud-api/cloud-pbase/user').then(body => {
+      console.log('user: ', body);
+      // 设置 user 至 store
+      this.props.setUser(body.data);
+    });
+  }
 
   // 切换菜单收起
   toggle = () => {
@@ -130,11 +147,11 @@ class App extends React.Component {
                     <Route path="/dashboard">
                       <Dashboard />
                     </Route>
-                    <Route path="/about">
+                    <AuthRoute path="/about">
                       <About />
-                    </Route>
+                    </AuthRoute>
                     <Route path="/">
-                      <Dashboard />
+                      <Default />
                     </Route>
                   </Switch>
                 </Content>
@@ -154,6 +171,10 @@ class App extends React.Component {
 
 function About() {
   return <h2>About</h2>;
+}
+
+function Default() {
+  return <h2>Default</h2>;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
